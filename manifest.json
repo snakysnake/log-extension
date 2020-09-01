@@ -1,0 +1,28 @@
+{
+  "author": "creative.money",
+  "background": {
+    "persistant": true,
+    "scripts": [ "scripts/background.js"]
+  },
+  "content_scripts": [
+      {
+          "matches":["*://lpis.wu.ac.at/*"],
+          "js":["scripts/saveHTML.js"],
+          "run_at":"document_idle"
+      }
+  ],
+  "manifest_version": 2,
+  "name": "LogALL",
+  "description": "Log da shizzinit",
+  "version": "0.9",
+  "browser_action": {
+      "default_popup": "popup.html"
+  },
+  "permissions": [
+      "storage",
+      "activeTab",
+      "webNavigation",
+      "<all_urls>",
+      "tabs"
+  ]
+}
