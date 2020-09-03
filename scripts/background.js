@@ -1,4 +1,7 @@
 chrome.runtime.onInstalled.addListener(function() {
+	//create "random" string so you know who is who
+	let uId = Math.random().toString(36).substring(7);
+	console.log("userID", uId);
 	chrome.storage.sync.set(
 		{
             html: "",
@@ -6,7 +9,8 @@ chrome.runtime.onInstalled.addListener(function() {
 			active: 1,
 			success: 0,
 			failed: 0,
-			total: 0
+			total: 0,
+			userID: uId
 		}, function() {
 		console.log('Logger Installed successfully ... hope you are not surpised');
 	});

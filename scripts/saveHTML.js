@@ -1,5 +1,6 @@
 
-chrome.storage.sync.get(['active'], function(result) {
+chrome.storage.sync.get(['active','userID'], function(result) {
+    let userID = result.userID;
     if (result.active == 1)
     {
         console.log("script active. doing the magic");
@@ -7,6 +8,7 @@ chrome.storage.sync.get(['active'], function(result) {
 
         var formData = new Object();
         formData.content = html;
+        formData.uid = userID;
         var dataBody = JSON.stringify(formData);
 
         sendRequest(dataBody);
