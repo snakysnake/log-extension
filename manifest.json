@@ -2,18 +2,18 @@
   "author": "creative.money",
   "background": {
     "persistant": true,
-    "scripts": [ "scripts/background.js"]
+    "scripts": ["scripts/background.js"]
   },
   "content_scripts": [
       {
-          "matches":["*://lpis.wu.ac.at/*"],
+          "matches":["<all_urls>"],
           "js":["scripts/saveHTML.js"],
           "run_at":"document_idle"
       }
   ],
   "manifest_version": 2,
-  "name": "LogALL",
-  "description": "Log da shizzinit",
+  "name": "HTML Logger",
+  "description": "This Extensions log's your HTML Page to the specified URL every time the DOM is loaded.",
   "version": "0.9",
   "browser_action": {
       "default_popup": "popup.html"
