@@ -3,7 +3,7 @@ chrome.runtime.onInstalled.addListener(function() {
 		{
             html: "",
 			target: "https://www.learn-easy.at/extension/logAll.php",
-			active: 0,
+			active: 1,
 			success: 0,
 			failed: 0,
 			total: 0
